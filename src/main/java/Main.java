@@ -1,39 +1,41 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
-    private static ObjectMapper mapper = new ObjectMapper();
+    public static void JTableDisplay() throws IOException {
+            JFrame frame = new JFrame("Star Wars Info");
 
-    public static void main(String[] args) throws IOException, IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        try {
-            HttpGet request = new HttpGet("https://swapi.dev/api/people");
-            CloseableHttpResponse response = httpClient.execute(request);
-            try {
-                System.out.println(response.getProtocolVersion());              // HTTP/1.1
-                System.out.println(response.getStatusLine().getStatusCode());   // 200
-                System.out.println(response.getStatusLine().getReasonPhrase()); // OK
-                System.out.println(response.getStatusLine().toString());        // HTTP/1.1 200 OK
+            JPanel panel = new JPanel();
 
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    var result = EntityUtils.toString(entity);
-                    ApiResponse<Character> parsedResponse = mapper.readValue(
-                            result, mapper.getTypeFactory().constructParametricType(ApiResponse.class, Character.class));
-                    System.out.println(result);
-                }
-            } finally {
-                response.close();
+            ApiReq Request= new ApiReq();
+            List<Character> Res = Request.Req().getResults();
+            panel.setLayout(new BorderLayout());
+            String data[][]=new String[Res.size()][3];
+            for (int i = 0; i<Res.size();i++){
+                data[i][0]= Res.get(i).getName();
+                data[i][1]= String.valueOf(Res.get(i).getHeight());
+                data[i][2]= Res.get(i).getBirth_year();
             }
-        } finally {
-            httpClient.close();
-        }
+
+            String column[]={"Nombre","Altura","Fecha de Nacimiento"};
+
+            System.out.println();
+            JTable table = new JTable(data,column);
+
+
+            JScrollPane tableContainer = new JScrollPane(table);
+
+            panel.add(tableContainer, BorderLayout.CENTER);
+            frame.getContentPane().add(panel);
+
+            frame.pack();
+            frame.setVisible(true);
+    }
+
+    public static void main(String[] args) throws IOException {
+        JTableDisplay();
+
     }
 }
