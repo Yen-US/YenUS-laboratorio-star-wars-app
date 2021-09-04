@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
+    public static void HelloWorld() {
+        System.out.println("Hola Mundo");
+    }
     public static void JTableDisplay() throws IOException {
             JFrame frame = new JFrame("Star Wars Info");
 
@@ -21,7 +24,7 @@ public class Main {
 
             String column[]={"Nombre","Altura","Fecha de Nacimiento"};
 
-            System.out.println();
+
             JTable table = new JTable(data,column);
 
 
@@ -35,6 +38,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
+        HelloWorld();
         JTableDisplay();
 
     }
