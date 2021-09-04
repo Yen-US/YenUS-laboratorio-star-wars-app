@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Main {
     public static void HelloWorld() {
-        System.out.println("Hola Mundo");
+        System.out.println("Hola Mundo,Hello World: inglish");
     }
     public static void JTableDisplay() throws IOException {
             JFrame frame = new JFrame("Star Wars Info");
