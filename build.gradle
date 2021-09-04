@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id "org.sonarqube" version "3.1.1"
+    id "org.sonarqube" version "3.3"
 }
 
 group 'org.example'
@@ -39,8 +39,8 @@ test {
 
 sonarqube {
   properties {
-    property "sonar.projectKey", "IsaacSNK_gradle-tutorial"
-    property "sonar.organization", "linear-data-structures"
+    property "sonar.projectKey", "Yen-US_YenUS-laboratorio-star-wars-app"
+    property "sonar.organization", "yen-us"
     property "sonar.host.url", "https://sonarcloud.io"
   }
 }
